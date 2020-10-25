@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  {% load static %}
+  <script src="{% static 'js/jquery.js' %}"></script>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" id="bootstrap-css">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+{% block javascript %}
+<script>
+    $('#exampleModalCenter').on('shown.bs.modal', function () {
+    $('#test').trigger('focus')
+  })
+  
+  function handleBackButton () {
+    window.location.href="{%url 'login' %}"
+  }
+
+  // TEST AJAX NON FONCTIONNELLE 
+  /*
+      $("#submit").click(function () {
+        console.log('onclick work')
+        $.ajax({
+        type: "POST",
+        url: "{%url 'profil' %}",
+        data: {
+          newEmail : $("#newEmail").val(),
+          email : $("#email").text(),    
+          password : $("#password").text()
+        },
+        success: 'success',
+        dataType: 'text'
+      })
+      })
+  */
+  </script>
+  {% endblock javascript %}
+
+  <body>  
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+      {% if isLogin == True %}
+      <form>
+        <div id="email">{{ email }}</div>
+        <div id="password">{{ password }}</div>
+      </form>
+
+      <div id="formFooter">
+        <button id="test" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+          Modify
+        </button>
+      </div>
+      {% else %}
+      <form>
+        <div>An Error was occured please back to the login page</div>
+      </form>
+
+      <div id="formFooter">
+        <button id="test" type="button" class="btn btn-primary" onclick="handleBackButton()">
+          Back
+        </button>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modifiy profile</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="{%url 'profil' %}" method="POST">
+            {% csrf_token %}
+            <input id="newEmail" type="email" name="newEmail" id="login" class="fadeIn second"  placeholder="new email">
+            <input hidden type="email" name="email" id="login" class="fadeIn second" name="login" value="{{ email }}" placeholder="login" >
+            <input hidden type="password" name="password" class="fadeIn third" name="login" value="{{ password }}" placeholder="password">
+            <button id="submit" class="fadeIn fourth" value="Modify">Modify</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

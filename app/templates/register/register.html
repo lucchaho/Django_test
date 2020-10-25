@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  {% load static %}
+  <script src="{% static 'js/jquery.js' %}"></script>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" id="bootstrap-css">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+          {% if isRegistered is None %}
+          <form id="loginForm" action="{%url 'register' %}" method="POST">
+            {% csrf_token %}
+            <input type="email" name="email" id="login" class="fadeIn second" name="login" placeholder="login">
+            <input type="password" name="password" class="fadeIn third" name="login" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Register">
+          </form>
+          {% elif isRegistered == True %}
+          <form>
+            <div>You are registered</div>
+          </form>
+          {% endif %}
+
+          <div id="formFooter">
+            <a class="underlineHover" href="{%url 'login' %}">Back</a>
+          </div>
+      
+        </div>
+      </div>
+</body>
+</html>

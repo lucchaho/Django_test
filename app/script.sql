@@ -1,0 +1,1 @@
+CREATE TABLE IF NOT EXISTS  ayomi_test_user_ayomi(id SERIAL PRIMARY KEY,email varchar (50) NOT NULL,password varchar (25) NOT NULL);
