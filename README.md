@@ -1,6 +1,6 @@
 # Django_test
 ## Comment lancer le projet
-- Lancez la commande `docker-compose down -v` à la racine du projet
+- Lancez la commande `docker-compose up -d --build` à la racine du projet
 - Allez dans votre browser allez à l'adresse `http://localhost:8000/`
 - ENJOY
 
